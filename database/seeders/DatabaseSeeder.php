@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         UsersSeeder::class;
         RegisteredAgentsSeeder::class;
+        CompaniesSeeder::class;
     }
 }
