@@ -49,7 +49,7 @@ class CompanyController extends Controller
         });
 
         //filter agents that have less load than capacity
-        $agents = $agents->filter(fn($agent) => $agent->load < $agent->capacity);
+        $agents = $agents->filter(fn($agent) => $agent->load < ($agent->capacity * 0.9));
 
         if ($agents->isEmpty())
             return response()->json([
