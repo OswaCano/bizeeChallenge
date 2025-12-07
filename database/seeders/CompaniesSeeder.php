@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RegisteredAgentType;
+use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,8 +29,8 @@ class CompaniesSeeder extends Seeder
                     'user_id' => $user->id,
                     'name' => "Company $user->name".uniqid(),
                     'state' => $states[array_rand($states)],
-                    'registered_agent_type' => 'user',
-                    'registration_agent_id' => $user->id,
+                    'registered_agent_type' => RegisteredAgentType::USER,
+                    'registered_agent_id' => null,
                 ]);
             }
         }
