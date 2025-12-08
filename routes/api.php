@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/companies', [CompanyController::class, 'store']);
 
-    Route::put('/registered-agent/{company}', [RegisteredAgentController::class, 'updateAgent']);
+    Route::put('/registered-agent/{company_id}', [RegisteredAgentController::class, 'updateAgent']);
 
     Route::get('/registered-agent-capacity/{state}', [RegisteredAgentController::class, 'checkCapacity']);
 

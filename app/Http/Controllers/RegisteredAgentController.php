@@ -10,13 +10,15 @@ use Illuminate\Http\Request;
 class RegisteredAgentController extends Controller
 {
 
-    public function updateAgent(Request $request, Company $company)
+    public function updateAgent(Request $request)
     {
-        $this->authorize('update', $company);
 
         $data = $request->validate([
             'use_service' => 'required|boolean',
+            'company_id' => 'required|exists:companies,id',
         ]);
+
+        $company = Company::where("id", $data["company_id"])->first();
 
         $user = auth()->user();
 
@@ -67,6 +69,7 @@ class RegisteredAgentController extends Controller
 
     public function checkCapacity($state)
     {
+
         $agents = RegisteredAgent::where('state', $state)->get();
 
         if ($agents->isEmpty()) {
