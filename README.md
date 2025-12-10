@@ -85,8 +85,6 @@ app/
  ├─ Http/
  │   ├─ Controllers/
  │   ├─ Requests/
- ├─ Events/
- ├─ Listeners/
 database/
  ├─ migrations/
  ├─ seeders/
