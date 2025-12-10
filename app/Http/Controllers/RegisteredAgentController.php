@@ -22,6 +22,10 @@ class RegisteredAgentController extends Controller
 
         $user = auth()->user();
 
+        if($user->id != $company->user_id){
+            return response("Unauthorized", 403);
+        }
+
         if (!$data['use_service']) {
             // assign the user as their own registered agent
             $company->update([

@@ -18,6 +18,7 @@ class CompanyController extends Controller
         ]);
 
         $user = auth()->user();
+        $data['state'] = strtoupper($data['state']);
 
         //case 0|false without registered agent
         if (!$data['use_service']) {
