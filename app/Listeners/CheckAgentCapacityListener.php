@@ -48,7 +48,8 @@ class CheckAgentCapacityListener implements ShouldQueue
 
         $cacheKey = "agent_capacity_notified:{$state}";
 
-        if ($ratio < $this->agentCapacity) {
+        if ($ratio >= $this->agentCapacity) {
+
             Mail::to($this->adminEmail)->queue(new AgentCapacityAlertMail($state, $totalCapacity, $used, $ratio));
             Cache::put($cacheKey, true);
         }

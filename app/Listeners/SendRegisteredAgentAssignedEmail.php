@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\RegisteredAgentAssigned;
 use App\Mail\RegisteredAgentAssignedMail;
+use App\Models\RegisteredAgent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -26,9 +27,11 @@ class SendRegisteredAgentAssignedEmail implements ShouldQueue
     {
         $company = $event->company;
 
-        $agent = $company->registered_agent();
+        $agent_id = $company->registered_agent_id;
 
-        if (! $agent || empty($agent->email)) {
+        $agent = RegisteredAgent::find($agent_id);
+
+        if (!$agent || empty($agent->email)) {
             return;
         }
 
