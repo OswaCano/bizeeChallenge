@@ -1,12 +1,16 @@
+@component('mail::message')
 <x-mail::message>
-# Introduction
+# Registered Agents Capacity Alert ({{ $state }})
 
-The body of your message.
+    Total capacity for {{ $state }} has reached **{{ $percent }}%**.
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+    - Total Capacity: **{{ $total }}**
+    - Assigned Companies: **{{ $used }}**
+    - Threshold: **90%**
+
+    Please review and add more agents if needed.
 
 Thanks,<br>
 {{ config('app.name') }}
 </x-mail::message>
+@endcomponent

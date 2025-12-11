@@ -1,12 +1,15 @@
+@component('mail::message')
 <x-mail::message>
-# Introduction
 
-The body of your message.
+    Hello {{ $company->registered_agent()->name }},
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+    You have been assigned as a **registered agent** for the following company:
+
+    - **Nombre:** {{ $company->name }}
+    - **Estado:** {{ $company->state }}
+    - **ID:** {{ $company->id }}
 
 Thanks,<br>
 {{ config('app.name') }}
 </x-mail::message>
+@endcomponent
