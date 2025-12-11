@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\RegisteredAgentType;
+use App\Events\RegisteredAgentAssigned;
 use App\Models\Company;
 use App\Models\RegisteredAgent;
 use Illuminate\Http\Request;
@@ -60,12 +61,18 @@ class CompanyController extends Controller
         $agents = $agents->sortByDesc('load');
         $agent = $agents->first();
 
-        return Company::create([
+        $company = Company::create([
             'user_id' => $user->id,
             'name' => $data['name'],
             'state' => $data['state'],
             'registered_agent_type' => RegisteredAgentType::REGISTEREDAGENT->value,
             'registered_agent_id' => $agent->id,
         ]);
+
+        event(new RegisteredAgentAssigned($company));
+
+        return response()->json([
+            'company' => $company,
+        ], 200);
     }
 }

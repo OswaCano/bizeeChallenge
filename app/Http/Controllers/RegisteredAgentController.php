@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\RegisteredAgentType;
+use App\Events\RegisteredAgentAssigned;
 use App\Models\Company;
 use App\Models\RegisteredAgent;
 use Illuminate\Http\Request;
@@ -68,7 +69,11 @@ class RegisteredAgentController extends Controller
             'registered_agent_id' => $agent->id,
         ]);
 
-        return $company;
+        event(new RegisteredAgentAssigned($company));
+
+        return response()->json([
+            'company' => $company,
+        ],200);
     }
 
     public function checkCapacity($state)

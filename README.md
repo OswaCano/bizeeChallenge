@@ -81,6 +81,9 @@ Authorization: Bearer {token}
 ## Project Structure
 ```plaintext
 app/
+ ├─ Events/
+ ├─ Listeners/
+ ├─ Mail/
  ├─ Models/
  ├─ Http/
  │   ├─ Controllers/
