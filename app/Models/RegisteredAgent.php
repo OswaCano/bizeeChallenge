@@ -19,12 +19,13 @@ class RegisteredAgent extends Model
 
     public function companies()
     {
-        return $this->hasMany(Company::class, 'registered_agent_id')
-            ->where('registered_agent_type', RegisteredAgentType::REGISTEREDAGENT);
+        return $this->belongsToMany(Company::class, 'company_assigment');
     }
 
     public function currentLoad()
     {
         return $this->companies()->count();
     }
+
+
 }

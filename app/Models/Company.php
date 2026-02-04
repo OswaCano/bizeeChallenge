@@ -24,13 +24,8 @@ class Company extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function registered_agent()
+    public function registered_agents()
     {
-        if ($this->registered_agent_type === RegisteredAgentType::USER) {
-            return $this->belongsTo(User::class);
-        }
-        else {
-            return $this->belongsTo(RegisteredAgent::class);
-        }
+        return $this->morphedByMany(RegisteredAgent::class, 'company_assignment');
     }
 }

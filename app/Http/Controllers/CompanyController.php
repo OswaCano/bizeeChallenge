@@ -33,7 +33,9 @@ class CompanyController extends Controller
         }
 
         //case 1|true using registered agent
-        $agents = RegisteredAgent::where('state', $data['state'])->get();
+        $agents = RegisteredAgent::where('state', $data['state'])
+            ->withCount('companies')
+            ->get();
 
         if ($agents->isEmpty())
             return response()->json([
@@ -41,6 +43,7 @@ class CompanyController extends Controller
             ], 422);
 
         //calculate the load for each agent
+        /*
         $agents = $agents->map(function ($agent) {
 
             $agent->load = Company::where('registered_agent_type', RegisteredAgentType::REGISTEREDAGENT->value)
@@ -49,6 +52,7 @@ class CompanyController extends Controller
 
             return $agent;
         });
+        */
 
         //filter agents that have less load than capacity
         $agents = $agents->filter(fn($agent) => $agent->load < ($agent->capacity * 0.9));
